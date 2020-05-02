@@ -1,0 +1,14 @@
+opencti:
+  url: 'http://localhost:4000'
+  token: 'Changeme'
+
+connector:
+  id: 'Changeme'
+  type: 'INTERNAL_IMPORT_FILE'
+  name: 'ImportFileTextObservables'
+  scope: 'text/plain'
+  confidence_level: 3
+  log_level: 'info'
+
+text_observables:
+  create_indicator: False
