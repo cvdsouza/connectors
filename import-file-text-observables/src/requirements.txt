@@ -6,3 +6,4 @@ beautifulsoup4==4.9.0
 requests==2.23.0
 stix2==1.4.0
 stix==1.2.0.9
+ioc-fanger

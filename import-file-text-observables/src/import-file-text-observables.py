@@ -6,6 +6,7 @@ import uuid
 import json
 import re
 from pycti import OpenCTIConnectorHelper, get_config_variable
+import ioc_fanger
 
 class ImportFileTextObservables:
     def __init__(self):
@@ -57,6 +58,7 @@ class ImportFileTextObservables:
         i = 0
         with open(path) as f:
             for ioc in f:
+                ioc = ioc_fanger.fang(ioc)
                 resolved_match = self.resolve_match(ioc)
                 if resolved_match:
                     observable = {
@@ -108,7 +110,7 @@ class ImportFileTextObservables:
         # Regex for detection
         regex_url = re.compile(
             '([A-Za-z]+://)([-\w]+(?:\.\w[-\w]*)+)(:\d+)?(/[^.!,?\"<>\[\]{}\s\x7F-\xFF]*(?:[.!,?]+[^.!,?\"<>\[\]{}\s\x7F-\xFF]+)*)?')
-        regex_domain = re.compile('\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b')
+        regex_domain = re.compile(r'\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b')
         regex_ipv4 = re.compile(
             '(?:(?:\d|[01]?\d\d|2[0-4]\d|25[0-5])\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d|\d)(?:\/\d{1,2})?')
         regex_ipv6 = re.compile(
